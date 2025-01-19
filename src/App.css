@@ -2,37 +2,36 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Wrapper {
+  counter-reset: global-counter;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Wrapper2 {
+  counter-reset: nested-counter;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Styling for top-level <ol> elements with class "continuous" */
+ol {
+  list-style: none; /* Remove default list styling */
+  padding-left: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Increment the global counter for each <li> in top-level lists */
+ol > li {
+  counter-increment: global-counter;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Display the global counter for top-level items */
+ol > li::before {
+  content: counter(global-counter) ". ";
+}
+
+/* Increment the nested counter for each <li> inside nested <ol> */
+ol > ol > li {
+  counter-increment: nested-counter;
+}
+
+/* Display letters for nested counters */
+ol > ol > li::before {
+  content: counter(nested-counter, lower-alpha) ". ";
 }
